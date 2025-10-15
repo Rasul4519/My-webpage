@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Acme — Professional Web Page</title>
+  <meta name="description" content="A clean, responsive, professional single-file website template." />
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Acme — Professional Web Page">
+  <meta property="og:description" content="A clean, responsive, professional single-file website template.">
+  <meta property="og:type" content="website">
+
+  <style>
+    /* CSS variables */
+    :root{
+      --bg:#0f1724; /* dark slate */
+      --card:#0b1220;
+      --muted:#94a3b8;
+      --accent:#00a3ff;
+      --glass: rgba(255,255,255,0.03);
+      --radius:14px;
+      --container:1200px;
+      --max-width:1100px;
+      --fg: #e6eef8;
+      --success:#2ecc71;
+    }
+
+    /* Reset & base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,var(--bg), #071025);
+      color:var(--fg);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:32px 20px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .site{max-width:var(--container);width:100%}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
+
+    /* Nav */
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{height:44px;width:44px;background:linear-gradient(135deg,var(--accent),#6c8cff);border-radius:10px;display:grid;place-items:center;font-weight:700}
+    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600}
+    nav a:hover{color:var(--fg)}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:32px;align-items:center;margin-top:28px}
+    .hero-main{padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:var(--radius)}
+    h1{font-size:clamp(26px,4vw,40px);margin:0 0 12px}
+    p.lead{color:var(--muted);margin:0 0 20px}
+
+    .cta-group{display:flex;gap:12px}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;border:0;cursor:pointer;font-weight:700}
+    .btn-primary{background:var(--accent);color:#001220}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--fg)}
+
+    /* Feature cards */
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+    .card{background:var(--card);padding:16px;border-radius:12px}
+    .card h3{margin:0 0 8px}
+    .muted{color:var(--muted);font-size:0.95rem}
+
+    /* Right column */
+    .panel{background:var(--glass);padding:20px;border-radius:14px;border:1px solid rgba(255,255,255,0.02)}
+    .stats{display:flex;gap:14px;justify-content:space-between}
+    .stat{flex:1;text-align:center}
+    .stat h4{margin:0;font-size:1.2rem}
+    .stat p{margin:6px 0 0;color:var(--muted);font-size:0.9rem}
+
+    /* Portfolio */
+    .portfolio{margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .work{background:linear-gradient(180deg, rgba(255,255,255,0.015), transparent);padding:14px;border-radius:12px}
+    .work img{width:100%;height:140px;object-fit:cover;border-radius:8px}
+
+    /* Testimonials */
+    .testimonials{margin-top:28px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+
+    /* Contact form */
+    .contact{margin-top:28px;background:var(--card);padding:18px;border-radius:12px}
+    .grid{display:grid;gap:12px}
+    .grid.cols-2{grid-template-columns:1fr 1fr}
+    label{font-size:0.9rem;color:var(--muted)}
+    input,textarea,button{font:inherit}
+    input,textarea{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--fg)}
+    textarea{min-height:120px;resize:vertical}
+
+    /* Footer */
+    footer{margin-top:36px;color:var(--muted);font-size:0.95rem;display:flex;justify-content:space-between;align-items:center}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .features,.portfolio{grid-template-columns:repeat(2,1fr)}
+      nav ul{display:none}
+      .mobile-toggle{display:inline-flex}
+    }
+    @media (max-width:640px){
+      .features,.portfolio,.testimonials{grid-template-columns:1fr}
+      header{flex-direction:column;align-items:flex-start}
+      .site{padding:8px}
+    }
+
+    .mobile-toggle{display:none;align-items:center;gap:8px;padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04)}
+
+    /* small helpers */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  </style>
+</head>
+<body>
+  <div class="site" id="site-root">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden>AC</div>
+        <div>
+          <div style="font-weight:800">Acme Studio</div>
+          <div style="font-size:0.85rem;color:var(--muted)">Design · Dev · Growth</div>
+        </div>
+      </div>
+
+      <nav aria-label="Main Navigation">
+        <button class="mobile-toggle" id="mobileToggle" aria-expanded="false" aria-controls="navList">Menu</button>
+        <ul id="navList">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#testimonials">Clients</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-heading">
+        <div class="hero-main">
+          <h1 id="hero-heading">Beautiful, fast, and reliable web experiences for modern teams.</h1>
+          <p class="lead">We build production-ready websites and apps that scale, focusing on performance, accessibility, and measurable results.</p>
+
+          <div class="cta-group">
+            <button class="btn btn-primary" id="hireBtn">Get a proposal</button>
+            <a class="btn btn-ghost" href="#work">View portfolio</a>
+          </div>
+
+          <div class="features" aria-hidden="false">
+            <div class="card">
+              <h3>Performance-first</h3>
+              <p class="muted">Optimized bundles, lazy loading, and server-side rendering options.</p>
+            </div>
+            <div class="card">
+              <h3>Accessible</h3>
+              <p class="muted">WCAG-friendly markup and keyboard-first interactions.</p>
+            </div>
+            <div class="card">
+              <h3>Design System</h3>
+              <p class="muted">Reusable components, tokens, and documentation for teams.</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="panel" aria-label="Quick stats">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+            <div style="font-weight:700">Trusted by</div>
+            <div style="font-size:0.85rem;color:var(--muted)">30+ companies</div>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <h4>98%</h4>
+              <p class="muted">Client satisfaction</p>
+            </div>
+            <div class="stat">
+              <h4>120+</h4>
+              <p class="muted">Projects delivered</p>
+            </div>
+            <div class="stat">
+              <h4>5y</h4>
+              <p class="muted">Average client tenure</p>
+            </div>
+          </div>
+
+          <hr style="border:none;border-top:1px dashed rgba(255,255,255,0.03);margin:14px 0">
+
+          <div style="display:flex;gap:8px;align-items:center;justify-content:space-between">
+            <div style="font-size:0.95rem">Quick estimate</div>
+            <div style="text-align:right">
+              <div style="font-weight:700">$3,500+</div>
+              <div class="muted">Typical website build</div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="work" class="portfolio" aria-labelledby="work-heading">
+        <h2 id="work-heading" class="sr-only">Portfolio</h2>
+
+        <article class="work" aria-label="Project A">
+          <img alt="Project A screenshot" src="https://picsum.photos/seed/p1/800/400">
+          <h3>Enterprise Landing</h3>
+          <p class="muted">High-converting marketing landing for B2B SaaS.</p>
+        </article>
+
+        <article class="work" aria-label="Project B">
+          <img alt="Project B screenshot" src="https://picsum.photos/seed/p2/800/400">
+          <h3>Design System</h3>
+          <p class="muted">Component library and documentation for scale.</p>
+        </article>
+
+        <article class="work" aria-label="Project C">
+          <img alt="Project C screenshot" src="https://picsum.photos/seed/p3/800/400">
+          <h3>Commerce Store</h3>
+          <p class="muted">Fast, accessible e‑commerce front-end.</p>
+        </article>
+      </section>
+
+      <section id="testimonials" class="testimonials" aria-labelledby="testimonials-heading">
+        <h2 id="testimonials-heading" class="sr-only">Client testimonials</h2>
+        <blockquote class="card" cite="#">
+          <p style="margin:0 0 8px">"Acme shipped our product with unbelievable speed and quality — revenue went up 42% in the first quarter."</p>
+          <footer class="muted">— Priya N., Head of Growth</footer>
+        </blockquote>
+
+        <blockquote class="card" cite="#">
+          <p style="margin:0 0 8px">"The dev team solved our performance issues and delivered a modern design system."</p>
+          <footer class="muted">— Mark T., CTO</footer>
+        </blockquote>
+      </section>
+
+      <section id="contact" class="contact" aria-labelledby="contact-heading">
+        <h2 id="contact-heading">Let's work together</h2>
+        <p class="muted">Send a short brief and we'll respond within 48 hours.</p>
+
+        <form id="contactForm" class="grid" aria-label="Contact form">
+          <div class="grid cols-2">
+            <label>
+              <div>Name</div>
+              <input required type="text" name="name" placeholder="Your full name" />
+            </label>
+            <label>
+              <div>Email</div>
+              <input required type="email" name="email" placeholder="your@company.com" />
+            </label>
+          </div>
+
+          <label>
+            <div>Project brief</div>
+            <textarea name="message" placeholder="Tell us about the project…" required></textarea>
+          </label>
+
+          <div style="display:flex;gap:10px;align-items:center">
+            <button type="submit" class="btn btn-primary">Send request</button>
+            <div id="formFeedback" class="muted" aria-live="polite"></div>
+          </div>
+        </form>
+      </section>
+
+    </main>
+
+    <footer>
+      <div>© <span id="year"></span> Acme Studio</div>
+      <div>Made with ♥ — <span class="muted">Terms · Privacy</span></div>
+    </footer>
+  </div>
+
+  <script>
+    // Progressive JS: mobile nav toggle & form handling
+    (function(){
+      const mobileToggle = document.getElementById('mobileToggle');
+      const navList = document.getElementById('navList');
+      if(mobileToggle){
+        mobileToggle.addEventListener('click', ()=>{
+          const expanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+          mobileToggle.setAttribute('aria-expanded', String(!expanded));
+          if(!expanded){
+            navList.style.display = 'block';
+          } else {
+            navList.style.display = '';
+          }
+        })
+      }
+
+      // Fill year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Simple client-side form handler (replace with API call)
+      const form = document.getElementById('contactForm');
+      const feedback = document.getElementById('formFeedback');
+      form.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        const data = new FormData(form);
+        const payload = Object.fromEntries(data.entries());
+
+        // basic validation
+        if(!payload.name || !payload.email || !payload.message){
+          feedback.textContent = 'Please fill all fields.';
+          return;
+        }
+
+        feedback.textContent = 'Sending...';
+        try{
+          // Example: replace with your endpoint
+          // const res = await fetch('/api/contact', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)});
+          // if(!res.ok) throw new Error('Network error');
+
+          // Simulate success
+          await new Promise(r=>setTimeout(r,800));
+          feedback.style.color = 'var(--success)';
+          feedback.textContent = 'Thanks — we received your request.';
+          form.reset();
+        }catch(err){
+          feedback.style.color = '';
+          feedback.textContent = 'Something went wrong. Try again later.';
+        }
+      })
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', (e)=>{
+          const href = a.getAttribute('href');
+          if(href.length>1){
+            e.preventDefault();
+            const el = document.querySelector(href);
+            if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+          }
+        })
+      })
+    })();
+  </script>
+</body>
+</html>
